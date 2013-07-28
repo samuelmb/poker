@@ -12,7 +12,14 @@ class Deck
     deal_card(5)
   end
 
+  def count
+    @cards.length
+  end
+
   def deal_card(num)
+    unless num <= count
+      raise "not enough cards in deck"
+    end
     @cards.shift(num)
   end
 
