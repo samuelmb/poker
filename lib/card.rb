@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+require 'colorize'
+
 
 class Card
   attr_reader :rank, :suit
@@ -11,7 +13,7 @@ class Card
     :spades   => "♠"
   }
 
-  VALUE_STRINGS = {
+  RANK_STRINGS = {
     2 => "2",
     3 => "3",
     4 => "4",
@@ -34,6 +36,18 @@ class Card
 
   def <=>(other_card)
     self.rank <=> other_card.rank
+  end
+
+  def color
+    if suit == :clubs || suit == :spades
+      :white
+    else
+      :red
+    end
+  end
+
+  def to_s
+    (RANK_STRINGS[rank] + SUIT_STRINGS[suit]).colorize(color)
   end
 
   def self.parse(string)

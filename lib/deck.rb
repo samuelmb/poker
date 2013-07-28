@@ -26,6 +26,10 @@ class Deck
     cards
   end
 
+  def shuffle
+    @cards.shuffle!
+  end
+
   def reset
     @cards = new_deck
   end
