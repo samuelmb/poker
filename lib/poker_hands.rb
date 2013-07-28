@@ -23,17 +23,6 @@ module PokerHands
     end
   end
 
-  def significant_value
-    case hand_strength
-    when 9
-      0
-    when 8
-      cards.last.rank
-    when 7
-
-  end
-
-
   def royal_flush?
     straight_flush? && cards.all? { |card| card.rank > 9 }
   end
@@ -86,4 +75,17 @@ module PokerHands
     end
     count.values.select { |count| count > 1 }.sort
   end
+
+  def tie_breaker(other_hand)
+    case hand_strength
+    when 9 # royal flush
+      0
+    when 8 # straight flush
+      cards.last <=> other_hand.cards.last
+    when 7 # four of a kind
+      cards[2] <=> other_hand.cards[2]
+    when 6
+    end
+  end
+
 end
